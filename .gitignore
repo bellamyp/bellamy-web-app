@@ -1,0 +1,8 @@
+# IDE configuration directories
+.idea/
+.vscode/
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
