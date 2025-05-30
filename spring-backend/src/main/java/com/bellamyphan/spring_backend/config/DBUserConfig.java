@@ -15,6 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
@@ -35,11 +36,13 @@ public class DBUserConfig {
     @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean dbUserEntityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
+            EntityManagerFactoryBuilder builder,
+            @Qualifier("jpaProperties") Map<String, Object> jpaProperties) {
         return builder
                 .dataSource(dbUserDataSource())
                 .packages("com.bellamyphan.spring_backend.dbuser.entity")
                 .persistenceUnit("dbUser")
+                .properties(jpaProperties)
                 .build();
     }
 

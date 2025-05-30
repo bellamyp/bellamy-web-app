@@ -14,6 +14,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
@@ -32,11 +33,13 @@ public class DBMoneyConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean dbMoneyEntityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
+            EntityManagerFactoryBuilder builder,
+            @Qualifier("jpaProperties") Map<String, Object> jpaProperties) {
         return builder
                 .dataSource(dbMoneyDataSource())
                 .packages("com.bellamyphan.spring_backend.dbmoney.entity")
                 .persistenceUnit("dbMoney")
+                .properties(jpaProperties)
                 .build();
     }
 
