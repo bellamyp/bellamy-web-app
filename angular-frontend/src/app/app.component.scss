@@ -1,1 +1,3 @@
-@use 'bootstrap/scss/bootstrap';
+.content-wrapper {
+  min-height: calc(100vh - 56px);  // Adjust for navbar height
+}
