@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleService roleService;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Value("${default.admin.username}")
     private String defaultAdminUsername;

@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class InitialUserDataConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(InitialUserDataConfig.class);
+
     private final RoleService roleService;
     private final UserService userService;
-
-    private static final Logger logger = LoggerFactory.getLogger(InitialUserDataConfig.class);
 
     @Bean
     public CommandLineRunner initiateUserData() {

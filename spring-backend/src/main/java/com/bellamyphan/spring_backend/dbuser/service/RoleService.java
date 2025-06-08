@@ -15,8 +15,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RoleService {
 
-    private final RoleRepository roleRepository;
     private static final Logger logger = LoggerFactory.getLogger(RoleService.class);
+
+    private final RoleRepository roleRepository;
 
     @Transactional
     public void createFirstRole() {
