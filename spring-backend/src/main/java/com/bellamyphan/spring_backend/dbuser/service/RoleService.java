@@ -1,6 +1,7 @@
 package com.bellamyphan.spring_backend.dbuser.service;
 
 import com.bellamyphan.spring_backend.dbuser.entity.Role;
+import com.bellamyphan.spring_backend.dbuser.exception.MissingRoleException;
 import com.bellamyphan.spring_backend.dbuser.exception.RoleCreationException;
 import com.bellamyphan.spring_backend.dbuser.repository.RoleRepository;
 import jakarta.transaction.Transactional;
@@ -31,6 +32,14 @@ public class RoleService {
             logger.error("Unexpected error while creating roles", ex);
             throw new RoleCreationException("Unexpected error while creating roles", ex);
         }
+    }
+
+    public Role getRoleOrThrow(String roleName) {
+        return roleRepository.findByName(roleName)
+                .orElseThrow(() -> {
+                    logger.error("Missing required role: {}", roleName);
+                    return new MissingRoleException("Role not found: " + roleName);
+                });
     }
 
     private Role createRoleIfNotExists(String roleName) {
