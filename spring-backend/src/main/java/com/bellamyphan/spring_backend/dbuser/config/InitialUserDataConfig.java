@@ -11,15 +11,15 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class InitialDataConfig {
+public class InitialUserDataConfig {
 
     private final RoleService roleService;
     private final UserService userService;
 
-    private static final Logger logger = LoggerFactory.getLogger(InitialDataConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(InitialUserDataConfig.class);
 
     @Bean
-    public CommandLineRunner initiateData() {
+    public CommandLineRunner initiateUserData() {
         return args -> {
             logger.info("Creating roles...");
             roleService.createFirstRole();
