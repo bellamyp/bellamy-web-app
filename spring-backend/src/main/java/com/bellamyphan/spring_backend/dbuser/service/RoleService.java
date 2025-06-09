@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 public class RoleService {
 
     private static final Logger logger = LoggerFactory.getLogger(RoleService.class);
-
     private final RoleRepository roleRepository;
 
     @Transactional

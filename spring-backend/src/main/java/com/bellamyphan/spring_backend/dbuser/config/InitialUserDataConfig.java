@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 public class InitialUserDataConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(InitialUserDataConfig.class);
-
     private final RoleService roleService;
     private final UserService userService;
 

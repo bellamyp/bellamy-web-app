@@ -13,7 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -26,9 +26,8 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
 
     @Value("${default.admin.username}")
@@ -44,7 +43,7 @@ public class UserService implements UserDetailsService {
     public void createFirstUser() {
         if (userRepository.findByUsername(defaultAdminUsername).isEmpty()) {
             // Encode the admin password
-            String encodedPassword = bCryptPasswordEncoder.encode(defaultAdminPassword);
+            String encodedPassword = passwordEncoder.encode(defaultAdminPassword);
             logger.debug("Encoded password for admin user: {}", defaultAdminUsername);
             // Check if ROLE_ADMIN, ROLE_USER exist, else throw exceptions
             Role adminRole = roleService.getRoleOrThrow("ROLE_ADMIN");
@@ -62,6 +61,15 @@ public class UserService implements UserDetailsService {
         } else {
             logger.info("Admin user with username '{}' already exists. Skipping creation.", defaultAdminUsername);
         }
+    }
+
+    public User findByUsernameWithRoles(String username) {
+        // Retrieve user from the database using username
+        return userRepository.findByUsernameWithRoles(username)
+                .orElseThrow(() -> {
+                    logger.warn("User not found with username: {}", username);
+                    return new UsernameNotFoundException("User not found with username: " + username);
+                });
     }
 
     @Override
