@@ -15,4 +15,9 @@ export class MainMenuComponent {
     // Navigate to the user registration page
     this.router.navigate(['/user-registration']);
   }
+
+  bankDashboard(): void {
+    // Navigate to the bank dashboard page
+    this.router.navigate(['/bank-dashboard']);
+  }
 }
