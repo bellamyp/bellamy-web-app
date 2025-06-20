@@ -41,7 +41,7 @@ export class LoginComponent {
   }
 
   onRegister(): void {
-    console.log('Navigate to register page');
-    // Implement your register navigation logic here
+    // Navigate to the user registration page
+    this.router.navigate(['/user-registration']);
   }
 }

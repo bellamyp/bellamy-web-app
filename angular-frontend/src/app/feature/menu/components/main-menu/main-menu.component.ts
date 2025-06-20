@@ -15,9 +15,4 @@ export class MainMenuComponent {
     // Navigate to the user registration page
     this.router.navigate(['/user-registration']);
   }
-
-  logIn(): void {
-    // Navigate to the user log in page
-    this.router.navigate(['/user-login']);
-  }
 }
