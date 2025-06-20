@@ -1,7 +1,9 @@
 package com.bellamyphan.spring_backend.dbuser.service;
 
+import com.bellamyphan.spring_backend.dbuser.dto.CreateUserRequestDto;
 import com.bellamyphan.spring_backend.dbuser.entity.Role;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
+import com.bellamyphan.spring_backend.dbuser.mapper.UserMapper;
 import com.bellamyphan.spring_backend.dbuser.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
+    private final UserMapper userMapper;
 
     @Value("${default.admin.username}")
     private String defaultAdminUsername;
@@ -61,6 +64,22 @@ public class UserService implements UserDetailsService {
         } else {
             logger.info("Admin user with username '{}' already exists. Skipping creation.", defaultAdminUsername);
         }
+    }
+
+    @Transactional
+    public User saveUser(CreateUserRequestDto userDto) {
+        User user = userMapper.toEntity(userDto);
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw new IllegalArgumentException("Username already registered by another user");
+        }
+        // Encode the password
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // Assign default role
+        Role userRole = roleService.getRoleOrThrow("ROLE_USER");
+        user.setRoles(new HashSet<>(List.of(userRole)));
+        // Save the user to the database
+        logger.info("Saving user with username: {}", user.getUsername());
+        return userRepository.save(user);
     }
 
     public User findByUsernameWithRoles(String username) {
