@@ -1,6 +1,9 @@
 package com.bellamyphan.spring_backend.dbmoney.service;
 
+import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateRequestDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
+import com.bellamyphan.spring_backend.dbmoney.entity.BankType;
+import com.bellamyphan.spring_backend.dbmoney.mapper.BankMapper;
 import com.bellamyphan.spring_backend.dbmoney.repository.BankRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,9 +16,17 @@ import java.util.List;
 public class BankService {
 
     private final BankRepository bankRepository;
+    private final BankTypeService bankTypeService;
+    private final BankMapper bankMapper;
 
     // Save a bank
-    public Bank saveBank(Bank bank) {
+    public Bank createNewBank(BankCreateRequestDto bankCreateRequestDto, Long userId) {
+        Bank bank = bankMapper.toEntity(bankCreateRequestDto);
+        // Lookup existing BankType by name
+        BankType bankType = bankTypeService.findByNameIgnoreCase(bankCreateRequestDto.getType());
+        bank.setId(null); // Ensure the ID is null for a new entity
+        bank.setUserId(userId); // Set the userId from the authenticated user
+        bank.setType(bankType);
         return bankRepository.save(bank);
     }
 

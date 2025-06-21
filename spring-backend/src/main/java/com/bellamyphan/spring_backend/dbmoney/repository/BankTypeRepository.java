@@ -11,4 +11,6 @@ public interface BankTypeRepository extends JpaRepository<BankType, Long> {
     // Jpa will generate basic CRUD methods here.
 
     Optional<BankType> findByType(String type);
+
+    Optional<BankType> findByTypeIgnoreCase(String type);
 }

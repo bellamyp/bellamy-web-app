@@ -18,6 +18,11 @@ public class BankTypeService {
     private static final Logger logger = LoggerFactory.getLogger(BankTypeService.class);
     private final BankTypeRepository bankTypeRepository;
 
+    public BankType findByNameIgnoreCase(BankType bankType) {
+        return bankTypeRepository.findByTypeIgnoreCase(bankType.getType())
+                .orElseThrow(() -> new BankTypeCreationException("BankType not found: " + bankType.getType()));
+    }
+
     @Transactional
     public void createFirstBankType() {
         try {

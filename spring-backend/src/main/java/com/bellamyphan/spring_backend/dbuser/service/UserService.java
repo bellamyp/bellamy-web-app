@@ -83,6 +83,11 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    public User findByUserName(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Cannot find the user with username: " + username));
+    }
+
     public User findByUsernameWithRoles(String username) {
         // Retrieve user from the database using username
         return userRepository.findByUsernameWithRoles(username)
