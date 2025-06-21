@@ -1,3 +1,8 @@
 .content-wrapper {
   min-height: calc(100vh - 56px);  // Adjust for navbar height
 }
+
+.content-wrapper {
+  padding-top: var(--navbar-height, 70px);
+  padding-bottom: var(--footer-height, 60px);
+}
