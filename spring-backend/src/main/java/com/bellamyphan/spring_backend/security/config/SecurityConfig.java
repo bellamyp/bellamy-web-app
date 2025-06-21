@@ -33,14 +33,16 @@ public class SecurityConfig {
                 // Disable CSRF (not needed for stateless JWT)
                 .csrf(AbstractHttpConfigurer::disable)
 
-                // Define authorization rules
+                // Define authorization rules for ROLES and TOKEN
                 .authorizeHttpRequests(auth -> auth
+                        // Make login, user registration, and resume endpoint public (no roles or token required)
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/resume").permitAll()
-                        .requestMatchers("/api/transactions/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/api/banks/**").hasAnyRole("USER", "ADMIN")
-                        .anyRequest().authenticated()
+                        // If user is USER, limit access to specific endpoints
+                        .requestMatchers("/api/transactions/**", "/api/banks/**").hasRole("USER")
+                        // Catch-all: if user is ADMIN, allow access to everything
+                        .anyRequest().hasRole("ADMIN")
                 )
 
                 // Make the session stateless (required for JWT)
