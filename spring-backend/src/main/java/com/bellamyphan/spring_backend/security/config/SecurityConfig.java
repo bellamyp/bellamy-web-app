@@ -1,5 +1,7 @@
 package com.bellamyphan.spring_backend.security.config;
 
+import com.bellamyphan.spring_backend.security.exception.CustomAccessDeniedHandler;
+import com.bellamyphan.spring_backend.security.exception.CustomAuthenticationEntryPoint;
 import com.bellamyphan.spring_backend.security.filter.TokenAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -43,6 +45,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/transactions/**", "/api/banks/**").hasRole("USER")
                         // Catch-all: if user is ADMIN, allow access to everything
                         .anyRequest().hasRole("ADMIN")
+                )
+                // Handle unauthorized access with custom entry point
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                        .accessDeniedHandler(new CustomAccessDeniedHandler())
                 )
 
                 // Make the session stateless (required for JWT)
