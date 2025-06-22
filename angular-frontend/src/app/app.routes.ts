@@ -23,5 +23,11 @@ export const routes: Routes = [
         canActivate: [authGuard],
         loadComponent: () => import('./feature/bank/components/dashboard/dashboard.component')
             .then(m => m.DashboardComponent)
+    },
+    {
+        path: 'bank-create',
+        canActivate: [authGuard],
+        loadComponent: () => import('./feature/bank/components/bank-create/bank-create.component')
+            .then(m => m.BankCreateComponent)
     }
 ];
