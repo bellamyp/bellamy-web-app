@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../../core/service/authentication.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -9,15 +10,44 @@ import { Router } from '@angular/router';
 })
 export class MainMenuComponent {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) { }
 
   userRegistration(): void {
     // Navigate to the user registration page
     this.router.navigate(['/user-registration']);
   }
 
+  transactionDashboard(): void {
+    // Navigate to the transaction dashboard page
+    alert('Transaction Dashboard is under construction.');
+  }
+
   bankDashboard(): void {
     // Navigate to the bank dashboard page
     this.router.navigate(['/bank-dashboard']);
   }
+
+  tickTacToe(): void {
+    // Navigate to the Tic Tac Toe game page
+    alert('Tic Tac Toe game is under construction.');
+  }
+
+  sendEmail(): void {
+    const username = this.authenticationService.username();
+    const subject = `Bellamy Web App: ${username ?? 'Guest'} request support`;
+    const body = `Username: ${username ?? 'Unknown'}\nYour email: \n\nI need support ...`;
+    const mailtoLink = `mailto:bellamyphan@icloud.com
+      ?subject=${encodeURIComponent(subject)}
+      &body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  }
+
+  manageUsers(): void {
+    // Navigate to the user management page
+    alert('User management is under construction.\nOnly admin can access this feature.');
+  }
+
 }

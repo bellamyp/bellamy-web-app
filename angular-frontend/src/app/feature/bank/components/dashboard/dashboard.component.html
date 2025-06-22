@@ -2,15 +2,15 @@
 <header class="bg-light py-2 border-bottom">
   <div class="container d-flex justify-content-center gap-3">
     <button class="btn btn-primary btn-sm" (click)="addBank()">Add Bank</button>
-    <button class="btn btn-warning btn-sm">Update Bank</button>
-    <button class="btn btn-danger btn-sm">Delete Bank</button>
+    <button class="btn btn-warning btn-sm" (click)="updateBank()">Update Bank</button>
+    <button class="btn btn-danger btn-sm" (click)="deleteBank()">Delete Bank</button>
   </div>
 </header>
 
 <!-- Top Notes Bar -->
 <div class="bg-secondary text-white text-center py-2">
-  <a href="#" class="text-white text-decoration-underline">Bank Details</a> |
-  <a href="#" class="text-white text-decoration-underline">Bank Statements</a>
+  <a class="text-white text-decoration-underline" (click)="bankDetails()">Bank Details</a> |
+  <a class="text-white text-decoration-underline" (click)="bankStatement()">Bank Statements</a>
 </div>
 
 <!-- Main Two-by-Two Grid -->

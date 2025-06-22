@@ -17,4 +17,20 @@ export class DashboardComponent {
     // Navigate to the user registration page
     this.router.navigate(['/bank-create']);
   }
+
+  updateBank(): void {
+    alert('Update Bank is under construction.');
+  }
+  
+  deleteBank(): void {
+    alert('Delete Bank is under construction.');
+  }
+
+  bankDetails(): void {
+    alert('Bank Details is under construction.');
+  }
+
+  bankStatement(): void {
+    alert('Bank Statement is under construction.');
+  }
 }
