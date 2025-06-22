@@ -5,7 +5,32 @@
 
         <!-- Bank Name -->
         <div class="form-group">
+            <label for="bankName">Bank Name:</label>
+            <input type="text" id="bankName" name="bankName" class="form-control" [ngModel]="bank().name"
+                (ngModelChange)="updateBankName($event)" required />
+        </div>
 
+        <!-- Bank Type Dropdown -->
+        <div class="form-group">
+            <label for="bankType">Bank Type:</label>
+            <select id="bankType" name="bankType" class="form-control" [ngModel]="bank().type"
+                (ngModelChange)="updateBankType($event)" required>
+                <option *ngFor="let type of bankTypes()" [value]="type">{{ type }}</option>
+            </select>
+        </div>
+
+        <!-- Open Date -->
+        <div class="form-group">
+            <label for="openDate">Open Date:</label>
+            <input type="date" id="openDate" name="openDate" class="form-control"
+                [ngModel]="(bank().openingDate | date:'yyyy-MM-dd')" (ngModelChange)="updateOpeningDate($event)"
+                required />
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button class="btn btn-primary" type="submit" [disabled]="bankForm.invalid">Submit</button>
+            <button class="btn btn-secondary" type="button" (click)="goBack()">Go Back</button>
         </div>
 
     </form>

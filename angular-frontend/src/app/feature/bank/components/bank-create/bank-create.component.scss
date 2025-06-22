@@ -2,7 +2,42 @@
   max-width: 500px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #e6fde9;
+  background-color: #fdfdfd;
   border-radius: 10px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+input.form-control,
+select.form-control {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+button.btn {
+  width: 48%;
 }
