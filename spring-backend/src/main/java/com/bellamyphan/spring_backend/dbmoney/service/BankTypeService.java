@@ -11,12 +11,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class BankTypeService {
 
     private static final Logger logger = LoggerFactory.getLogger(BankTypeService.class);
     private final BankTypeRepository bankTypeRepository;
+
+    public List<String> findAllBankTypes() {
+        List<BankType> bankTypes = bankTypeRepository.findAll();
+        return bankTypes.stream()
+                .map(BankType::getType)
+                .collect(Collectors.toList());
+    }
 
     public BankType findByNameIgnoreCase(BankType bankType) {
         return bankTypeRepository.findByTypeIgnoreCase(bankType.getType())
