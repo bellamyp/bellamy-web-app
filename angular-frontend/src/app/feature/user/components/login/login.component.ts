@@ -24,12 +24,14 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (response) => {
         this.authService.storeToken(response.token);
-        console.log('Login successful, token stored:', response.token);
+
+        // Debug only
+        // console.log('Login successful, token stored:', response.token);
 
         this.router.navigate(['/main-menu']).then(success => {
-          console.log('Navigation success:', success);
+          console.log('Navigation to main menu success:', success);
         }).catch(err => {
-          console.error('Navigation error:', err);
+          console.error('Navigation to main menu error:', err);
         });
       },
       error: (err) => {
