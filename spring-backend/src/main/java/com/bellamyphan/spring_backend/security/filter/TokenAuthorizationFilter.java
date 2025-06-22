@@ -1,5 +1,6 @@
 package com.bellamyphan.spring_backend.security.filter;
 
+import com.bellamyphan.spring_backend.dbuser.service.UserService;
 import com.bellamyphan.spring_backend.security.service.JwtService;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -25,6 +27,7 @@ public class TokenAuthorizationFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(TokenAuthorizationFilter.class);
     private final JwtService jwtService;
+    private final UserService userService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -35,16 +38,29 @@ public class TokenAuthorizationFilter implements Filter {
             logger.debug("JWT token extracted: {}", token);
             String username = jwtService.authorizeToken(token);
             if (username != null) {
-                logger.debug("Token authorized for user: {}", username);
-                Set<String> roles = jwtService.extractRoles(token);
-                logger.debug("Extracted roles from token: {}", roles);
-                List<SimpleGrantedAuthority> authorities = roles.stream()
-                        .map(SimpleGrantedAuthority::new)
-                        .toList();
-                var authentication = new UsernamePasswordAuthenticationToken(
-                        username, null, authorities);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                logger.info("User '{}' authenticated with roles: {}", username, roles);
+                try {
+                    // ✅ Check if the user exists (throws if not found)
+                    userService.loadUserByUsername(username);
+
+                    logger.debug("Token authorized for user: {}", username);
+                    Set<String> roles = jwtService.extractRoles(token);
+                    logger.debug("Extracted roles from token: {}", roles);
+
+                    // ✅ Log token usage and URI being accessed
+                    logger.info("Token used by: '{}', request to: {}", username, httpRequest.getRequestURI());
+
+                    List<SimpleGrantedAuthority> authorities = roles.stream()
+                            .map(SimpleGrantedAuthority::new)
+                            .toList();
+                    var authentication = new UsernamePasswordAuthenticationToken(
+                            username, null, authorities);
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    logger.info("User '{}' authenticated with roles: {}", username, roles);
+                } catch (UsernameNotFoundException e) {
+                    logger.warn("Valid token but user '{}' not found in UserDB", username);
+                    // Optionally: clear the context just in case
+                    SecurityContextHolder.clearContext();
+                }
             } else {
                 logger.warn("Token authorization failed");}
         } else {
