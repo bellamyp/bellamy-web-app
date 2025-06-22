@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthenticationService);
   const router = inject(Router);
   const token = authService.getToken();
-  console.log('AuthGuard: Token found:', token); // Debugging log
+  // console.log('AuthGuard: Token found:', token); // Debugging log
 
   if (token) {
     try {
