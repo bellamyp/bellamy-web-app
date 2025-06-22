@@ -37,8 +37,8 @@ export class MainMenuComponent {
 
   sendEmail(): void {
     const username = this.authenticationService.username();
-    const subject = `Bellamy Web App: ${username ?? 'Guest'} request support`;
-    const body = `Username: ${username ?? 'Unknown'}\nYour email: \n\nI need support ...`;
+    const subject = `Bellamy Web App: Username '${username ?? 'Guest'}' request support`;
+    const body = `Please provide details about the issues or requests you have regarding the Bellamy Web App below:\n\n`;
     const mailtoLink = `mailto:bellamyphan@icloud.com
       ?subject=${encodeURIComponent(subject)}
       &body=${encodeURIComponent(body)}`;
