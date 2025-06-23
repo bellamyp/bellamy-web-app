@@ -1,55 +1,55 @@
-<!-- Top Action Bar -->
-<header class="bg-light py-2 border-bottom">
-  <div class="container d-flex justify-content-center gap-3">
+<div class="glass-wrapper">
+  <!-- Top Action Bar -->
+  <div class="action-bar d-flex justify-content-center gap-3 mb-3">
     <button class="btn btn-primary btn-sm" (click)="addBank()">Add Bank</button>
     <button class="btn btn-warning btn-sm" (click)="updateBank()">Update Bank</button>
     <button class="btn btn-danger btn-sm" (click)="deleteBank()">Delete Bank</button>
   </div>
-</header>
 
-<!-- Top Notes Bar -->
-<div class="bg-secondary text-white text-center py-2">
-  <a class="text-white text-decoration-underline" (click)="bankDetails()">Bank Details</a> |
-  <a class="text-white text-decoration-underline" (click)="bankStatement()">Bank Statements</a>
-</div>
-
-<!-- Main Two-by-Two Grid -->
-<main class="container-fluid py-3">
-  <div class="row g-3">
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-header bg-primary text-white">Credit Cards</div>
-        <div class="card-body">
-          <!-- Fill in later -->
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-header bg-dark text-white">Loans</div>
-        <div class="card-body">
-          <!-- Fill in later -->
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-header bg-success text-white">Checking Accounts</div>
-        <div class="card-body">
-          <!-- Fill in later -->
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-header bg-info text-white">Saving Accounts</div>
-        <div class="card-body">
-          <!-- Fill in later -->
-        </div>
-      </div>
-    </div>
+  <!-- Top Notes Bar -->
+  <div class="notes-bar text-center mb-4">
+    <a class="text-white link-underline" (click)="bankDetails()">Bank Details</a> |
+    <a class="text-white link-underline" (click)="bankStatement()">Bank Statements</a>
   </div>
-</main>
+
+  <!-- Main Grid -->
+  <main class="container-fluid py-3">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card h-100 border-light bg-transparent text-white">
+          <div class="card-header bg-primary">Credit Cards</div>
+          <div class="card-body">
+            <!-- Fill in later -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100 border-light bg-transparent text-white">
+          <div class="card-header bg-dark">Loans</div>
+          <div class="card-body">
+            <!-- Fill in later -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100 border-light bg-transparent text-white">
+          <div class="card-header bg-success">Checking Accounts</div>
+          <div class="card-body">
+            <!-- Fill in later -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100 border-light bg-transparent text-white">
+          <div class="card-header bg-info">Saving Accounts</div>
+          <div class="card-body">
+            <!-- Fill in later -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
