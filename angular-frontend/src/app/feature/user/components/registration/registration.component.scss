@@ -1,0 +1,112 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.registration-wrapper {
+  min-height: 80vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.registration-card {
+  max-width: 600px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.7s ease forwards;
+  color: #fff;
+
+  .card-header {
+    background: rgba(0, 123, 255, 0.8);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.6);
+    h3 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 2rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  .card-body {
+    padding: 2rem 2.5rem;
+
+    .form-label {
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+
+    input.form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 12px;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 0 12px rgba(0, 123, 255, 0.8);
+        color: #000;
+        outline: none;
+      }
+
+      &::placeholder {
+        color: #ccc;
+      }
+    }
+
+    .form-check-label {
+      color: #ddd;
+      font-weight: 600;
+    }
+
+    .alert {
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      &.alert-warning {
+        background: rgba(255, 193, 7, 0.3);
+        color: #856404;
+        border: none;
+      }
+      &.alert-secondary {
+        background: rgba(108, 117, 125, 0.3);
+        color: #f8f9fa;
+        border: none;
+      }
+    }
+
+    .btn-primary {
+      background: #007bffcc;
+      border: none;
+      font-weight: 700;
+      border-radius: 14px;
+      padding: 0.85rem 1rem;
+      box-shadow: 0 7px 20px rgba(0, 123, 255, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        background: #0056b3cc;
+        box-shadow: 0 10px 30px rgba(0, 86, 179, 0.8);
+      }
+    }
+  }
+}

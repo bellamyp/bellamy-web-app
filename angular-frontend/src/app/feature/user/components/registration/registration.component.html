@@ -1,71 +1,67 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white text-center">
-          <h3>User Registration</h3>
+<div class="registration-wrapper">
+  <div class="registration-card card shadow-sm">
+    <div class="card-header text-center text-white">
+      <h3>User Registration</h3>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onRegister()">
+
+        <!-- First Name Field -->
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" id="firstName" [value]="user().firstName" (input)="onInputChange('firstName', $event)"
+            class="form-control" placeholder="Enter your first name" required />
         </div>
-        <div class="card-body">
-          <form (ngSubmit)="onRegister()">
 
-            <!-- First Name Field -->
-            <div class="mb-3">
-              <label for="firstName" class="form-label">First Name</label>
-              <input type="text" id="firstName" [value]="user().firstName" (input)="onInputChange('firstName', $event)"
-                class="form-control" placeholder="Enter your first name" required />
-            </div>
-
-            <!-- Last Name Field -->
-            <div class="mb-3">
-              <label for="lastName" class="form-label">Last Name</label>
-              <input type="text" id="lastName" [value]="user().lastName" (input)="onInputChange('lastName', $event)"
-                class="form-control" placeholder="Enter your last name" required />
-            </div>
-
-            <!-- Demo Account Checkbox -->
-            <div class="form-check mb-3">
-              <input type="checkbox" id="isDemo" class="form-check-input" [checked]="user().isDemo"
-                (change)="onCheckboxChange('isDemo', $event)" />
-              <label for="isDemo" class="form-check-label">
-                Register as Demo Account
-              </label>
-            </div>
-
-            <!-- Demo Account Explanation -->
-            <div *ngIf="user().isDemo" class="alert alert-warning mt-2" role="alert">
-              This demo account is for exploration purposes only. Sample data will be automatically generated, and the
-              server may randomly add, modify, or remove your data. Please do not rely on it for long-term use.
-            </div>
-
-            <!-- Reminder to add phone and email -->
-            <div class="alert alert-secondary mt-3" role="alert">
-              🔧 Reminder: Add fields for <strong>Phone Number</strong> and <strong>Email</strong> to complete user
-              registration.
-            </div>
-
-            <!-- Username Field -->
-            <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" id="username" [value]="user().username" (input)="onInputChange('username', $event)"
-                class="form-control" placeholder="Enter your username" required />
-            </div>
-
-            <!-- Password Field -->
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" id="password" [value]="user().password" (input)="onInputChange('password', $event)"
-                class="form-control" placeholder="Enter your password" required />
-            </div>
-
-            <!-- Submit Button -->
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary btn-lg">
-                Register
-              </button>
-            </div>
-          </form>
+        <!-- Last Name Field -->
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" id="lastName" [value]="user().lastName" (input)="onInputChange('lastName', $event)"
+            class="form-control" placeholder="Enter your last name" required />
         </div>
-      </div>
+
+        <!-- Demo Account Checkbox -->
+        <div class="form-check mb-3">
+          <input type="checkbox" id="isDemo" class="form-check-input" [checked]="user().isDemo"
+            (change)="onCheckboxChange('isDemo', $event)" />
+          <label for="isDemo" class="form-check-label">
+            Register as Demo Account
+          </label>
+        </div>
+
+        <!-- Demo Account Explanation -->
+        <div *ngIf="user().isDemo" class="alert alert-warning mt-2" role="alert">
+          This demo account is for exploration purposes only. Sample data will be automatically generated, and the
+          server may randomly add, modify, or remove your data. Please do not rely on it for long-term use.
+        </div>
+
+        <!-- Reminder to add phone and email -->
+        <div class="alert alert-secondary mt-3" role="alert">
+          🔧 Reminder: Add fields for <strong>Phone Number</strong> and <strong>Email</strong> to complete user
+          registration.
+        </div>
+
+        <!-- Username Field -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" [value]="user().username" (input)="onInputChange('username', $event)"
+            class="form-control" placeholder="Enter your username" required />
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" [value]="user().password" (input)="onInputChange('password', $event)"
+            class="form-control" placeholder="Enter your password" required />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">
+            Register
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
