@@ -37,13 +37,24 @@ export class RegistrationComponent {
       },
       error: (error) => {
         console.error('Error registering user:', error);
-        alert('Error registering user. Please try again.');
+
+        // Try to extract a specific error message from the backend response
+        const errorMessage = error?.error?.errors?.error;
+
+        if (errorMessage === 'Username already registered by another user') {
+          alert('This username is already taken. Please choose another one.');
+        } else {
+          alert('Error registering user. Please try again.');
+        }
       }
     });
   }
 
-  private updateField(field: keyof UserRegistration, value: string) {
-    this.user.update((u) => ({ ...u, [field]: value }));
+  onCheckboxChange(field: keyof UserRegistration, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input) {
+      this.user.update((u) => ({ ...u, [field]: input.checked }));
+    }
   }
 
   onInputChange(field: keyof UserRegistration, event: Event): void {
@@ -51,5 +62,9 @@ export class RegistrationComponent {
     if (input) {
       this.updateField(field, input.value);
     }
+  }
+
+  private updateField(field: keyof UserRegistration, value: string) {
+    this.user.update((u) => ({ ...u, [field]: value }));
   }
 }

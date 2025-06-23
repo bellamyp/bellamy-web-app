@@ -10,57 +10,38 @@
             <!-- First Name Field -->
             <div class="mb-3">
               <label for="firstName" class="form-label">First Name</label>
-              <input
-                type="text"
-                id="firstName"
-                [value]="user().firstName"
-                (input)="onInputChange('firstName', $event)"
-                class="form-control"
-                placeholder="Enter your first name"
-                required
-              />
+              <input type="text" id="firstName" [value]="user().firstName" (input)="onInputChange('firstName', $event)"
+                class="form-control" placeholder="Enter your first name" required />
             </div>
 
             <!-- Last Name Field -->
             <div class="mb-3">
               <label for="lastName" class="form-label">Last Name</label>
-              <input
-                type="text"
-                id="lastName"
-                [value]="user().lastName"
-                (input)="onInputChange('lastName', $event)"
-                class="form-control"
-                placeholder="Enter your last name"
-                required
-              />
+              <input type="text" id="lastName" [value]="user().lastName" (input)="onInputChange('lastName', $event)"
+                class="form-control" placeholder="Enter your last name" required />
             </div>
 
             <!-- Username Field -->
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
-              <input
-                type="text"
-                id="username"
-                [value]="user().username"
-                (input)="onInputChange('username', $event)"
-                class="form-control"
-                placeholder="Enter your username"
-                required
-              />
+              <input type="text" id="username" [value]="user().username" (input)="onInputChange('username', $event)"
+                class="form-control" placeholder="Enter your username" required />
             </div>
 
             <!-- Password Field -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                id="password"
-                [value]="user().password"
-                (input)="onInputChange('password', $event)"
-                class="form-control"
-                placeholder="Enter your password"
-                required
-              />
+              <input type="password" id="password" [value]="user().password" (input)="onInputChange('password', $event)"
+                class="form-control" placeholder="Enter your password" required />
+            </div>
+
+            <!-- Demo Account Checkbox -->
+            <div class="form-check mb-3">
+              <input type="checkbox" id="isDemo" class="form-check-input" [checked]="user().isDemo"
+                (change)="onCheckboxChange('isDemo', $event)" />
+              <label for="isDemo" class="form-check-label">
+                Register as Demo Account
+              </label>
             </div>
 
             <!-- Submit Button -->

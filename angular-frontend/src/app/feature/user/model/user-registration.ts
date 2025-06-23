@@ -1,8 +1,9 @@
 export class UserRegistration {
-    constructor(
+  constructor(
     public firstName: string = '',
     public lastName: string = '',
     public username: string = '',
-    public password: string = ''
-  ) {}
+    public password: string = '',
+    public isDemo: boolean = false,
+  ) { }
 }
