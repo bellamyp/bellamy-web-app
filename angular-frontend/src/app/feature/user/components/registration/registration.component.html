@@ -7,6 +7,7 @@
         </div>
         <div class="card-body">
           <form (ngSubmit)="onRegister()">
+
             <!-- First Name Field -->
             <div class="mb-3">
               <label for="firstName" class="form-label">First Name</label>
@@ -19,6 +20,21 @@
               <label for="lastName" class="form-label">Last Name</label>
               <input type="text" id="lastName" [value]="user().lastName" (input)="onInputChange('lastName', $event)"
                 class="form-control" placeholder="Enter your last name" required />
+            </div>
+
+            <!-- Demo Account Checkbox -->
+            <div class="form-check mb-3">
+              <input type="checkbox" id="isDemo" class="form-check-input" [checked]="user().isDemo"
+                (change)="onCheckboxChange('isDemo', $event)" />
+              <label for="isDemo" class="form-check-label">
+                Register as Demo Account
+              </label>
+            </div>
+
+            <!-- Demo Account Explanation -->
+            <div *ngIf="user().isDemo" class="alert alert-warning mt-2" role="alert">
+              This demo account is for exploration purposes only. Sample data will be automatically generated, and the
+              server may randomly add, modify, or remove your data. Please do not rely on it for long-term use.
             </div>
 
             <!-- Reminder to add phone and email -->
@@ -39,21 +55,6 @@
               <label for="password" class="form-label">Password</label>
               <input type="password" id="password" [value]="user().password" (input)="onInputChange('password', $event)"
                 class="form-control" placeholder="Enter your password" required />
-            </div>
-
-            <!-- Demo Account Checkbox -->
-            <div class="form-check mb-3">
-              <input type="checkbox" id="isDemo" class="form-check-input" [checked]="user().isDemo"
-                (change)="onCheckboxChange('isDemo', $event)" />
-              <label for="isDemo" class="form-check-label">
-                Register as Demo Account
-              </label>
-            </div>
-
-            <!-- Demo Account Explanation -->
-            <div *ngIf="user().isDemo" class="alert alert-warning mt-2" role="alert">
-              This demo account is for exploration purposes only. Sample data will be automatically generated, and the
-              server may randomly add, modify, or remove your data. Please do not rely on it for long-term use.
             </div>
 
             <!-- Submit Button -->
