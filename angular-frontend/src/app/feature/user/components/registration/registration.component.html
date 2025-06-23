@@ -44,6 +44,12 @@
               </label>
             </div>
 
+            <!-- Demo Account Explanation -->
+            <div *ngIf="user().isDemo" class="alert alert-warning mt-2" role="alert">
+              This demo account is for exploration purposes only. Sample data will be automatically generated, and the
+              server may randomly add, modify, or remove your data. Please do not rely on it for long-term use.
+            </div>
+
             <!-- Submit Button -->
             <div class="d-grid">
               <button type="submit" class="btn btn-primary btn-lg">

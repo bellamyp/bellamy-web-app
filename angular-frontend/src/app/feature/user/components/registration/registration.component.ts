@@ -3,10 +3,11 @@ import { UserRegistration } from '../../model/user-registration';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss'
 })
