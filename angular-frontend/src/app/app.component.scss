@@ -1,8 +1,69 @@
-.content-wrapper {
-  min-height: calc(100vh - 56px);  // Adjust for navbar height
+// Variables for heights
+$navbar-height: 56px;
+$footer-height: 50px;
+
+// Frosted glass style mixin
+@mixin glass-effect($bg-opacity: 0.15, $blur: 12px, $border-opacity: 0.3) {
+  background: rgba(255, 255, 255, $bg-opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border-bottom: 1px solid rgba(255, 255, 255, $border-opacity);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+// Navbar styling
+.navbar-glass {
+  @include glass-effect(0.2, 14px, 0.4);
+  height: $navbar-height;
+  padding: 0 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1030; // above other content
+
+  .nav-link {
+    color: #f0f0f0;
+    transition: color 0.3s ease;
+
+    &.active,
+    &:hover {
+      color: #007bff;
+      font-weight: 700;
+    }
+  }
+
+  .btn-light {
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    box-shadow: none;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e0e0e0;
+      color: #007bff;
+    }
+  }
+}
+
+// Content wrapper accounts for navbar and footer height
 .content-wrapper {
-  padding-top: var(--navbar-height, 70px);
-  padding-bottom: var(--footer-height, 60px);
+  min-height: calc(100vh - #{$navbar-height} - #{$footer-height});
+  padding-top: $navbar-height;
+  padding-bottom: $footer-height;
+  background: transparent;
+  color: #fff;
+  overflow-y: auto;
+}
+
+// Footer styling
+.footer-glass {
+  @include glass-effect(0.15, 14px, 0.3);
+  height: 50px;  // or your $footer-height variable
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #eee;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1030;
 }

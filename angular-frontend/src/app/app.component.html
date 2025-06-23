@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
+<nav class="navbar navbar-expand-sm navbar-glass fixed-top">
   <div class="container d-flex justify-content-between">
     <!-- Left-aligned links -->
     <ul class="navbar-nav d-flex gap-3">
@@ -6,12 +6,13 @@
         <a class="nav-link text-light" routerLink="/main-menu" routerLinkActive="active">Main Menu</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="https://bellamyphan.space">Portfolio</a>
+        <a class="nav-link text-light" href="https://bellamyphan.space" target="_blank"
+          rel="noopener noreferrer">Portfolio</a>
       </li>
     </ul>
 
     <!-- Right-aligned links -->
-    <ul class="navbar-nav d-flex gap-3">
+    <ul class="navbar-nav d-flex gap-3 align-items-center">
       <li class="nav-item" *ngIf="username()">
         <span class="navbar-text text-light">Current User: <strong>{{ username() }}</strong></span>
       </li>
@@ -23,15 +24,15 @@
   </div>
 </nav>
 
-<div class="content-wrapper d-flex justify-content-center align-items-center">
-  <div class="container">
+<div class="content-wrapper">
+  <div class="container py-4">
     <router-outlet></router-outlet>
   </div>
 </div>
 
-<footer class="bg-primary text-light fixed-bottom">
-  <div class="container text-center py-2">
-    <small>
+<footer class="footer-glass fixed-bottom">
+  <div class="container">
+    <small class="text-center w-100 d-block">
       All rights reserved to Bellamy Web App 2025 &amp; author {{ 'BellamyPhan@iCloud.com' }}
     </small>
   </div>
