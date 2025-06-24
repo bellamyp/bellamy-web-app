@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +24,13 @@ public class TransactionTypeService {
 
     public Optional<TransactionType> findById(Long id) {
         return transactionTypeRepository.findById(id);
+    }
+
+    public List<String> findAllTransactionTypes() {
+        List<TransactionType> transactionTypes = transactionTypeRepository.findAll();
+        return transactionTypes.stream()
+                .map(TransactionType::getType)
+                .collect(Collectors.toList());
     }
 
     @Transactional
