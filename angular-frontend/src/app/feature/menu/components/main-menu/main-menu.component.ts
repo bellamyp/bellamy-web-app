@@ -55,4 +55,8 @@ export class MainMenuComponent {
     alert('User management is under construction.\nOnly admin can access this feature.');
   }
 
+  adminTools(): void {
+     this.router.navigate(['/admin-menu']);
+  }
+
 }

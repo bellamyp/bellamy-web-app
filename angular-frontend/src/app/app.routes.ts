@@ -9,6 +9,12 @@ export const routes: Routes = [
             .then(m => m.MainMenuComponent)
     },
     {
+        path: 'admin-menu',
+        canActivate: [authGuard],
+        loadComponent: () => import('./feature/menu/components/admin-menu/admin-menu.component')
+            .then(m => m.AdminMenuComponent)
+    },
+    {
         path: 'user-login',
         loadComponent: () => import('./feature/user/components/login/login.component')
             .then(m => m.LoginComponent)
