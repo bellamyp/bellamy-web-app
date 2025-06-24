@@ -171,18 +171,67 @@
 //     }
 // }
 
-.menu-button {
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 0.85rem 1.2rem;
-    border-radius: 16px;
-    letter-spacing: 0.5px;
-    backdrop-filter: blur(8px);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+// .menu-button {
+//     width: 100%;
+//     font-size: 1.1rem;
+//     font-weight: 600;
+//     padding: 0.85rem 1.2rem;
+//     border-radius: 16px;
+//     letter-spacing: 0.5px;
+//     backdrop-filter: blur(8px);
+//     transition: transform 0.2s ease, box-shadow 0.3s ease;
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-    }
+//     &:hover {
+//         transform: translateY(-4px);
+//         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+//     }
+// }
+
+.menu-button {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.menu-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.18);
+  color: #000;
+}
+
+/* Optional: Color variants for glassy context */
+.menu-button.btn-primary {
+  background-color: rgba(0, 123, 255, 0.2);
+  border-color: rgba(0, 123, 255, 0.4);
+}
+
+.menu-button.btn-success {
+  background-color: rgba(40, 167, 69, 0.2);
+  border-color: rgba(40, 167, 69, 0.4);
+}
+
+.menu-button.btn-warning {
+  background-color: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.4);
+  color: #000;
+}
+
+.menu-button.btn-info {
+  background-color: rgba(23, 162, 184, 0.2);
+  border-color: rgba(23, 162, 184, 0.4);
+}
+
+.menu-button.btn-danger {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: rgba(220, 53, 69, 0.4);
 }
