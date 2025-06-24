@@ -25,6 +25,7 @@ public class Transaction {
     @NotNull
     private Double amount;
 
+    // Each transaction must have a type
     @ManyToOne(fetch = FetchType.LAZY, optional = false) // Foreign key relationship
     @JoinColumn(name = "type_id", referencedColumnName = "id") // Foreign key column in 'transactions' table
     private TransactionType type;
