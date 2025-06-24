@@ -16,8 +16,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "LEFT JOIN FETCH t.type " +
             "LEFT JOIN FETCH t.bank b " +
             "LEFT JOIN FETCH b.type " +
-            "JOIN FETCH t.user " +
-            "WHERE t.user.id = :userId")
+            "WHERE t.userId = :userId")
     List<Transaction> findAllByUserIdWithDetails(@Param("userId") Long userId);
 
 }
