@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-dashboard',
@@ -26,5 +27,33 @@ export class TransactionDashboardComponent {
     { date: '2025-06-01', amount: 110.00, type: 'Utility', notes: 'Internet and cable bill for the month' },
     { date: '2025-05-30', amount: 14.25, type: 'Groceries', notes: 'Bought fruits and snacks for the week' }
   ];
+
+  constructor(
+    private router: Router
+  ) { }
+
+  addTransaction(): void {
+    this.router.navigate(['/transaction-create']);
+  }
+
+  searchTransaction(): void {
+    alert('Search Transaction functionality is not implemented yet.');
+  }
+
+  listTransactions(): void {
+    alert('List Transactions functionality is not implemented yet.');
+  }
+
+  monthlyReport(): void {
+    alert('Monthly Report functionality is not implemented yet.');
+  }
+
+  transactionEdit(): void {
+    alert('Transaction Edit functionality is not implemented yet.');
+  }
+
+  transactionDelete(): void {
+    alert('Transaction Delete functionality is not implemented yet.'); 
+  }
 
 }

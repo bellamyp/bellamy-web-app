@@ -31,6 +31,12 @@ export const routes: Routes = [
             .then(m => m.TransactionDashboardComponent)
     },
     {
+        path: 'transaction-create',
+        canActivate: [authGuard],
+        loadComponent: () => import('./feature/transaction/components/transaction-create/transaction-create.component')
+            .then(m => m.TransactionCreateComponent)
+    },
+    {
         path: 'bank-dashboard',
         canActivate: [authGuard],
         loadComponent: () => import('./feature/bank/components/dashboard/dashboard.component')

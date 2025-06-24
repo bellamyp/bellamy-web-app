@@ -2,10 +2,10 @@
   <h2 class="text-center mb-4 text-light">📊 Transaction Dashboard</h2>
 
   <div class="d-flex justify-content-center flex-wrap gap-3 mb-4">
-    <button class="btn-glass">Add Transaction</button>
-    <button class="btn-glass">Search Transaction</button>
-    <button class="btn-glass">List Transactions</button>
-    <button class="btn-glass">Monthly Report</button>
+    <button class="btn-glass" (click)="addTransaction()">Add Transaction</button>
+    <button class="btn-glass" (click)="searchTransaction()">Search Transaction</button>
+    <button class="btn-glass" (click)="listTransactions()">List Transactions</button>
+    <button class="btn-glass" (click)="monthlyReport()">Monthly Report</button>
   </div>
 
   <div class="table-responsive">
@@ -26,8 +26,8 @@
           <td>{{ t.type }}</td>
           <td>{{ t.notes }}</td>
           <td>
-            <button class="btn btn-sm btn-warning me-2">Edit</button>
-            <button class="btn btn-sm btn-danger">Delete</button>
+            <button class="btn btn-sm btn-warning me-2" (click)="transactionEdit()">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="transactionDelete()">Delete</button>
           </td>
         </tr>
       </tbody>
