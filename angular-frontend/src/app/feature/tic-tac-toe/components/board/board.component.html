@@ -1,18 +1,21 @@
-<div class="container text-center mt-5">
-    <h1 class="display-4 mb-3 text-gradient">Tic Tac Toe</h1>
+<div class="game-wrapper my-5">
+    <div class="container text-center">
+        <h1 class="display-4 mb-3 text-gradient">Tic Tac Toe</h1>
 
-    <h4 class="mb-4">
-        Current Player: <span class="text-primary">{{ player }}</span>
-    </h4>
+        <h4 class="mb-4">
+            Current Player: <span class="text-primary">{{ player }}</span>
+        </h4>
 
-    <button class="btn btn-outline-success mb-4 px-4 py-2" (click)="newGame()">Start a New Game</button>
+        <button class="btn btn-outline-success mb-4 px-4 py-2" (click)="newGame()">Start a New Game</button>
 
-    <h2 *ngIf="winner" class="text-danger fw-bold">
-        🎉 Player {{ winner }} wins!
-    </h2>
+        <h2 *ngIf="winner" class="text-danger fw-bold">
+            🎉 Player {{ winner }} wins!
+        </h2>
 
-    <main class="board glassy mt-4">
-        <app-square *ngFor="let square of squares; let i = index" [value]="square" (click)="makeMove(i)" class="square">
-        </app-square>
-    </main>
+        <main class="board mt-4">
+            <app-square *ngFor="let square of squares; let i = index" [value]="square" (click)="makeMove(i)"
+                class="square">
+            </app-square>
+        </main>
+    </div>
 </div>
