@@ -1,16 +1,18 @@
-<div class="container text-center mt-4">
-    <h1 class="mb-4">Current Player: <span class="text-primary">{{ player }}</span></h1>
+<div class="container text-center mt-5">
+    <h1 class="display-4 mb-3 text-gradient">Tic Tac Toe</h1>
 
-    <button class="btn btn-success mb-4" (click)="newGame()">Start a New Game</button>
+    <h4 class="mb-4">
+        Current Player: <span class="text-primary">{{ player }}</span>
+    </h4>
 
-    <h2 *ngIf="winner" class="text-danger">
-        Player {{ winner }} wins!
+    <button class="btn btn-outline-success mb-4 px-4 py-2" (click)="newGame()">Start a New Game</button>
+
+    <h2 *ngIf="winner" class="text-danger fw-bold">
+        🎉 Player {{ winner }} wins!
     </h2>
 
-    <main class="d-flex flex-wrap justify-content-center mt-4" style="max-width: 300px; margin: 0 auto;">
-        <app-square *ngFor="let square of squares; let i = index" [value]="square" (click)="makeMove(i)"
-            class="border border-dark d-flex align-items-center justify-content-center"
-            style="width: 100px; height: 100px; font-size: 2rem;">
+    <main class="board glassy mt-4">
+        <app-square *ngFor="let square of squares; let i = index" [value]="square" (click)="makeMove(i)" class="square">
         </app-square>
     </main>
 </div>
