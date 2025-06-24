@@ -21,8 +21,7 @@ export class MainMenuComponent {
   }
 
   transactionDashboard(): void {
-    // Navigate to the transaction dashboard page
-    alert('Transaction Dashboard is under construction.');
+    this.router.navigate(['/transaction-dashboard']);
   }
 
   bankDashboard(): void {

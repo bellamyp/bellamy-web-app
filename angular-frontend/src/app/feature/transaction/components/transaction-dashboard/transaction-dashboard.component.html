@@ -1,0 +1,37 @@
+<div class="container my-4">
+  <h2 class="text-center mb-4">📊 Transaction Dashboard</h2>
+
+  <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
+    <button class="btn btn-primary">Add Transaction</button>
+    <button class="btn btn-secondary">Search Transaction</button>
+    <button class="btn btn-success">List Transactions</button>
+    <button class="btn btn-info">Monthly Report</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Type</th>
+          <th>Notes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example row, replace with *ngFor -->
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.date }}</td>
+          <td>{{ transaction.amount | currency }}</td>
+          <td>{{ transaction.type }}</td>
+          <td>{{ transaction.notes }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning">Edit</button>
+            <button class="btn btn-sm btn-danger ms-2">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
