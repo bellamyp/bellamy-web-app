@@ -1,0 +1,24 @@
+.square {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #000;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    /* Light gray background */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.square:hover {
+    background-color: #e9ecef;
+    /* Slightly darker gray on hover */
+    transform: scale(1.05);
+    /* Slight zoom effect */
+}
+
+.square:active {
+    background-color: #dee2e6;
+    /* Even darker gray when clicked */
+}

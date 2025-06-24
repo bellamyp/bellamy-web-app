@@ -32,7 +32,7 @@ export class MainMenuComponent {
 
   tickTacToe(): void {
     // Navigate to the Tic Tac Toe game page
-    alert('Tic Tac Toe game is under construction.');
+    this.router.navigate(['/tic-tac-toe']);
   }
 
   changeBackground(): void {

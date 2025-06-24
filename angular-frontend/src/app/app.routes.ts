@@ -29,5 +29,10 @@ export const routes: Routes = [
         canActivate: [authGuard],
         loadComponent: () => import('./feature/bank/components/bank-create/bank-create.component')
             .then(m => m.BankCreateComponent)
+    },
+    {
+        path: 'tic-tac-toe',
+        loadComponent: () => import('./feature/tic-tac-toe/components/board/board.component')
+            .then(m => m.BoardComponent)
     }
 ];
