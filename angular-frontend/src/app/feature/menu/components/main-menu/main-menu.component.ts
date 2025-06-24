@@ -35,6 +35,11 @@ export class MainMenuComponent {
     alert('Tic Tac Toe game is under construction.');
   }
 
+  changeBackground(): void {
+    // Navigate to the background change page
+    alert('Change Background feature is under construction.');
+  }
+
   sendEmail(): void {
     const username = this.authenticationService.username();
     const subject = `Bellamy Web App: Username '${username ?? 'Guest'}' request support`;
