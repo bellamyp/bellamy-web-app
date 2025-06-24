@@ -1,16 +1,16 @@
-<div class="container my-4">
-  <h2 class="text-center mb-4">📊 Transaction Dashboard</h2>
+<div class="dashboard-glass card slide-up p-4 mx-auto my-5">
+  <h2 class="text-center mb-4 text-light">📊 Transaction Dashboard</h2>
 
-  <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
-    <button class="btn btn-primary">Add Transaction</button>
-    <button class="btn btn-secondary">Search Transaction</button>
-    <button class="btn btn-success">List Transactions</button>
-    <button class="btn btn-info">Monthly Report</button>
+  <div class="d-flex justify-content-center flex-wrap gap-3 mb-4">
+    <button class="btn-glass">Add Transaction</button>
+    <button class="btn-glass">Search Transaction</button>
+    <button class="btn-glass">List Transactions</button>
+    <button class="btn-glass">Monthly Report</button>
   </div>
 
   <div class="table-responsive">
-    <table class="table table-bordered table-striped">
-      <thead class="table-dark">
+    <table class="table table-hover glass-table text-light">
+      <thead>
         <tr>
           <th>Date</th>
           <th>Amount</th>
@@ -20,15 +20,14 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Example row, replace with *ngFor -->
-        <tr *ngFor="let transaction of transactions">
-          <td>{{ transaction.date }}</td>
-          <td>{{ transaction.amount | currency }}</td>
-          <td>{{ transaction.type }}</td>
-          <td>{{ transaction.notes }}</td>
+        <tr *ngFor="let t of transactions">
+          <td>{{ t.date }}</td>
+          <td>{{ t.amount | currency }}</td>
+          <td>{{ t.type }}</td>
+          <td>{{ t.notes }}</td>
           <td>
-            <button class="btn btn-sm btn-warning">Edit</button>
-            <button class="btn btn-sm btn-danger ms-2">Delete</button>
+            <button class="btn btn-sm btn-warning me-2">Edit</button>
+            <button class="btn btn-sm btn-danger">Delete</button>
           </td>
         </tr>
       </tbody>
