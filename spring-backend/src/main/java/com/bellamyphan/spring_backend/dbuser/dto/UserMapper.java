@@ -1,22 +1,20 @@
-package com.bellamyphan.spring_backend.dbuser.mapper;
+package com.bellamyphan.spring_backend.dbuser.dto;
 
-import com.bellamyphan.spring_backend.dbuser.dto.CreateUserRequestDto;
-import com.bellamyphan.spring_backend.dbuser.dto.CreateUserResponseDto;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
 
-    public CreateUserResponseDto toResponseDto(User user) {
-        return new CreateUserResponseDto(
+    public UserCreateResponseDto toResponseDto(User user) {
+        return new UserCreateResponseDto(
                 user.getUsername(),
                 user.getFirstName(),
                 user.getLastName()
         );
     }
 
-    public User toEntity(CreateUserRequestDto dto) {
+    public User toEntity(UserCreateRequestDto dto) {
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());

@@ -1,9 +1,9 @@
 package com.bellamyphan.spring_backend.dbuser.controller;
 
-import com.bellamyphan.spring_backend.dbuser.dto.CreateUserRequestDto;
-import com.bellamyphan.spring_backend.dbuser.dto.CreateUserResponseDto;
+import com.bellamyphan.spring_backend.dbuser.dto.UserCreateRequestDto;
+import com.bellamyphan.spring_backend.dbuser.dto.UserCreateResponseDto;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
-import com.bellamyphan.spring_backend.dbuser.mapper.UserMapper;
+import com.bellamyphan.spring_backend.dbuser.dto.UserMapper;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +22,9 @@ public class UserController {
     private final UserMapper userMapper;
 
     @PostMapping
-    public ResponseEntity<CreateUserResponseDto> createUser(@Valid @RequestBody CreateUserRequestDto user) {
-        User createdUser = userService.saveUser(user);
+    public ResponseEntity<UserCreateResponseDto> createUser(@Valid @RequestBody UserCreateRequestDto user) {
+        User requestedUser = userMapper.toEntity(user);
+        User createdUser = userService.saveUser(requestedUser);
         return ResponseEntity.ok(userMapper.toResponseDto(createdUser));
     }
 

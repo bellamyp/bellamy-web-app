@@ -15,6 +15,8 @@ public class TransactionService {
 
     @Transactional
     public Transaction createTransaction(Transaction transaction, User user) {
+        // Ensure id is null to create a new transaction
+        transaction.setId(null);
         transaction.setUserId(user.getId());
         return transactionRepository.save(transaction);
     }

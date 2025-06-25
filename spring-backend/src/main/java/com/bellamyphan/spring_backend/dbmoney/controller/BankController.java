@@ -4,7 +4,7 @@ import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateRequestDto;
 import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateResponseDto;
 import com.bellamyphan.spring_backend.dbmoney.dto.BankInputDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
-import com.bellamyphan.spring_backend.dbmoney.mapper.BankMapper;
+import com.bellamyphan.spring_backend.dbmoney.dto.BankMapper;
 import com.bellamyphan.spring_backend.dbmoney.service.BankService;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;
@@ -35,7 +35,8 @@ public class BankController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUserName(username);
         // Save the new bank to the database
-        Bank newBank = bankService.createNewBank(bankCreateRequestDto, user.getId());
+        Bank requestBank = bankMapper.toEntity(bankCreateRequestDto);
+        Bank newBank = bankService.createNewBank(requestBank, user.getId());
         logger.info("Username {} created a new bank: {}", username, newBank);
         // Return the response with the created bank
         BankCreateResponseDto responseDto = bankMapper.toBankCreateResponseDto(newBank);

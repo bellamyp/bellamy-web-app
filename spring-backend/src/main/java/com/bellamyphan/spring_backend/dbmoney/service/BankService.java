@@ -1,10 +1,9 @@
 package com.bellamyphan.spring_backend.dbmoney.service;
 
-import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateRequestDto;
 import com.bellamyphan.spring_backend.dbmoney.dto.BankInputDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
 import com.bellamyphan.spring_backend.dbmoney.entity.BankType;
-import com.bellamyphan.spring_backend.dbmoney.mapper.BankMapper;
+import com.bellamyphan.spring_backend.dbmoney.dto.BankMapper;
 import com.bellamyphan.spring_backend.dbmoney.repository.BankRepository;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;
@@ -27,11 +26,9 @@ public class BankService {
 
     // Save a bank
     @Transactional
-    // Need to move DTO mapping to Controller layer
-    public Bank createNewBank(BankCreateRequestDto bankCreateRequestDto, Long userId) {
-        Bank bank = bankMapper.toEntity(bankCreateRequestDto);
+    public Bank createNewBank(Bank bank, Long userId) {
         // Lookup existing BankType by name
-        BankType bankType = bankTypeService.findByNameIgnoreCase(bankCreateRequestDto.getType());
+        BankType bankType = bankTypeService.findByNameIgnoreCase(bank.getType());
         bank.setId(null); // Ensure the ID is null for a new entity
         bank.setUserId(userId); // Set the userId from the authenticated user
         bank.setType(bankType);

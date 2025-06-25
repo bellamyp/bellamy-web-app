@@ -1,10 +1,8 @@
 package com.bellamyphan.spring_backend.dbuser.service;
 
-import com.bellamyphan.spring_backend.dbuser.dto.CreateUserRequestDto;
 import com.bellamyphan.spring_backend.dbuser.entity.Role;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.exception.UserAlreadyExistsException;
-import com.bellamyphan.spring_backend.dbuser.mapper.UserMapper;
 import com.bellamyphan.spring_backend.dbuser.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +30,6 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
-    private final UserMapper userMapper;
 
     @Value("${default.admin.username}")
     private String defaultAdminUsername;
@@ -68,8 +65,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User saveUser(CreateUserRequestDto userDto) {
-        User user = userMapper.toEntity(userDto);
+    public User saveUser(User user) {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("Username already registered by another user");
         }

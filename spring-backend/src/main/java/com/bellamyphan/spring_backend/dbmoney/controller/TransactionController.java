@@ -3,7 +3,7 @@ package com.bellamyphan.spring_backend.dbmoney.controller;
 import com.bellamyphan.spring_backend.dbmoney.dto.TransactionCreateRequestDto;
 import com.bellamyphan.spring_backend.dbmoney.dto.TransactionCreateResponseDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Transaction;
-import com.bellamyphan.spring_backend.dbmoney.mapper.TransactionMapper;
+import com.bellamyphan.spring_backend.dbmoney.dto.TransactionMapper;
 import com.bellamyphan.spring_backend.dbmoney.service.TransactionService;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;

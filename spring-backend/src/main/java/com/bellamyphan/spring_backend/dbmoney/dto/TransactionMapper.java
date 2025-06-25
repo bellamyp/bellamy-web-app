@@ -1,7 +1,5 @@
-package com.bellamyphan.spring_backend.dbmoney.mapper;
+package com.bellamyphan.spring_backend.dbmoney.dto;
 
-import com.bellamyphan.spring_backend.dbmoney.dto.TransactionCreateRequestDto;
-import com.bellamyphan.spring_backend.dbmoney.dto.TransactionCreateResponseDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
 import com.bellamyphan.spring_backend.dbmoney.entity.Transaction;
 import com.bellamyphan.spring_backend.dbmoney.entity.TransactionType;
