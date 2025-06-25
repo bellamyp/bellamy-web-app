@@ -21,7 +21,7 @@ public class InitialUserDataConfig {
     public CommandLineRunner initiateUserData() {
         return args -> {
             logger.info("Creating roles...");
-            roleService.createFirstRole();
+            roleService.initializeRoles();
 
             logger.info("Creating first user...");
             userService.createFirstUser();

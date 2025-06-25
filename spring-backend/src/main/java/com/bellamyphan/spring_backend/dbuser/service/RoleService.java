@@ -1,6 +1,7 @@
 package com.bellamyphan.spring_backend.dbuser.service;
 
 import com.bellamyphan.spring_backend.dbuser.entity.Role;
+import com.bellamyphan.spring_backend.dbuser.entity.RoleEnum;
 import com.bellamyphan.spring_backend.dbuser.exception.MissingRoleException;
 import com.bellamyphan.spring_backend.dbuser.exception.RoleCreationException;
 import com.bellamyphan.spring_backend.dbuser.repository.RoleRepository;
@@ -19,12 +20,13 @@ public class RoleService {
     private final RoleRepository roleRepository;
 
     @Transactional
-    public void createFirstRole() {
+    public void initializeRoles() {
         try {
-            // Create or get the default admin role
-            Role adminRole = createRoleIfNotExists("ROLE_ADMIN");
-            // Create or get the default user role
-            Role userRole = createRoleIfNotExists("ROLE_USER");
+            for (RoleEnum roleEnum : RoleEnum.values()) {
+                String roleName = roleEnum.getRoleName(); // e.g. "ROLE_USER", "ROLE_ADMIN"
+                String displayName = roleEnum.getDisplayName(); // e.g. "User", "Admin"
+                createRoleIfNotExists(roleName, displayName);
+            }
         } catch (DataAccessException dae) {
             logger.error("Database error while creating roles", dae);
             throw new RoleCreationException("Database error while creating roles", dae);
@@ -35,23 +37,24 @@ public class RoleService {
     }
 
     public Role getRoleOrThrow(String roleName) {
+        RoleEnum roleEnum = RoleEnum.fromRoleName(roleName);
         return roleRepository.findByName(roleName)
                 .orElseThrow(() -> {
-                    logger.error("Missing required role: {}", roleName);
-                    return new MissingRoleException("Role not found: " + roleName);
+                    logger.error("Missing required role: {}", roleEnum.getDisplayName());
+                    return new MissingRoleException("Role not found: " + roleEnum.getDisplayName());
                 });
     }
 
-    private Role createRoleIfNotExists(String roleName) {
-        return roleRepository.findByName(roleName)
+    private void createRoleIfNotExists(String roleName, String displayName) {
+        roleRepository.findByName(roleName)
                 .map(existingRole -> {
-                    logger.info("Role '{}' already exists", roleName);
+                    logger.info("Role '{}' already exists", displayName);
                     return existingRole;
                 })
                 .orElseGet(() -> {
                     Role role = new Role(roleName);
                     roleRepository.save(role);
-                    logger.info("Created role: {}", roleName);
+                    logger.info("Created role: {}", displayName);
                     return role;
                 });
     }
