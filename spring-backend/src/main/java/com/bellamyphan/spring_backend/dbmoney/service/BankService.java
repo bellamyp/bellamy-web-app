@@ -1,11 +1,15 @@
 package com.bellamyphan.spring_backend.dbmoney.service;
 
 import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateRequestDto;
+import com.bellamyphan.spring_backend.dbmoney.dto.BankInputDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
 import com.bellamyphan.spring_backend.dbmoney.entity.BankType;
 import com.bellamyphan.spring_backend.dbmoney.mapper.BankMapper;
 import com.bellamyphan.spring_backend.dbmoney.repository.BankRepository;
+import com.bellamyphan.spring_backend.dbuser.entity.User;
+import com.bellamyphan.spring_backend.dbuser.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -17,6 +21,7 @@ public class BankService {
 
     private final BankRepository bankRepository;
     private final BankTypeService bankTypeService;
+    private final UserService userService;
     private final BankMapper bankMapper;
 
     // Save a bank
@@ -35,17 +40,16 @@ public class BankService {
         return bankRepository.findByUserId(userId).orElse(new LinkedList<>());
     }
 
-//    public List<BankDto> getBanksByAuthenticatedUser() {
-//        // Get user by the jwt token
-//        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-//        User user = userRepository.findByUsername(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("Cannot find the user with username: " + username));
-//        // Get banks by user id
-//        List<Bank> banks = bankRepository.findByUserId(user.getId())
-//                .orElseThrow(() -> new RuntimeException("No banks found for user id: " + user.getId()));
-//        // Map to dto
-//        return banks.stream()
-//                .map(dtoMapperService::bankMappingToDto)
-//                .toList();
-//    }
+    public List<BankInputDto> getBanksByAuthenticatedUser() {
+        // Get user by the jwt token
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUserName(username);
+        // Get banks by user id
+        List<Bank> banks = bankRepository.findByUserId(user.getId())
+                .orElseThrow(() -> new RuntimeException("No banks found for user id: " + user.getId()));
+        // Map to dto
+        return banks.stream()
+                .map(bankMapper::toBankInputDto)
+                .toList();
+    }
 }

@@ -2,6 +2,7 @@ package com.bellamyphan.spring_backend.dbmoney.controller;
 
 import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateRequestDto;
 import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateResponseDto;
+import com.bellamyphan.spring_backend.dbmoney.dto.BankInputDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
 import com.bellamyphan.spring_backend.dbmoney.mapper.BankMapper;
 import com.bellamyphan.spring_backend.dbmoney.service.BankService;
@@ -14,10 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/banks")
@@ -38,8 +38,14 @@ public class BankController {
         Bank newBank = bankService.createNewBank(bankCreateRequestDto, user.getId());
         logger.info("Username {} created a new bank: {}", username, newBank);
         // Return the response with the created bank
-        BankCreateResponseDto responseDto = bankMapper.toResponseDto(newBank);
+        BankCreateResponseDto responseDto = bankMapper.toBankCreateResponseDto(newBank);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+    }
+
+    @GetMapping
+    ResponseEntity<List<BankInputDto>> getAllBanksByUserId() {
+        List<BankInputDto> bankInputDtos = bankService.getBanksByAuthenticatedUser();
+        return ResponseEntity.ok(bankInputDtos);
     }
 
 }
