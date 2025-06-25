@@ -1,1 +1,54 @@
-<p>transaction-create works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <h3 class="text-center mb-4 text-primary">Create Transaction</h3>
+
+            <form (ngSubmit)="onSubmit()" #transactionForm="ngForm" class="position-relative">
+                <!-- Date Field -->
+                <div class="form-group mb-4">
+                    <label for="date" class="font-weight-bold">Date</label>
+                    <input class="form-control form-control-lg" type="date" id="date" name="date"
+                        [(ngModel)]="transaction.date" required />
+                </div>
+
+                <!-- Amount Field -->
+                <div class="form-group mb-4">
+                    <label for="amount" class="font-weight-bold">Amount</label>
+                    <input class="form-control form-control-lg" type="number" id="amount" name="amount"
+                        [(ngModel)]="transaction.amount" required />
+                </div>
+
+                <!-- Type Field (ng-select) -->
+                <div class="form-group mb-4">
+                    <label for="type" class="font-weight-bold">Transaction Type</label>
+                    <ng-select [items]="transactionTypes" bindLabel="type" bindValue="id" [(ngModel)]="transaction.type"
+                        name="type" placeholder="Select Transaction Type" [searchable]="true"
+                        [dropdownPosition]="'bottom'" [appendTo]="'body'" class="form-control form-control-lg">
+                    </ng-select>
+                </div>
+
+                <!-- Bank Field -->
+                <div class="form-group mb-4">
+                    <label for="bank" class="font-weight-bold">Bank</label>
+                    <ng-select [items]="banks" bindLabel="name" bindValue="id" [(ngModel)]="transaction.bank"
+                        name="bank" placeholder="Select Bank" [searchable]="true" [dropdownPosition]="'bottom'"
+                        [appendTo]="'body'" class="form-control form-control-lg" />
+                </div>
+
+                <!-- Notes Field -->
+                <div class="form-group mb-4">
+                    <label for="notes" class="font-weight-bold">Notes</label>
+                    <textarea class="form-control form-control-lg" id="notes" name="notes"
+                        [(ngModel)]="transaction.notes" rows="4"></textarea>
+                </div>
+
+                <!-- Buttons Section -->
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-secondary btn-lg" type="button" (click)="goBack()">Back</button>
+                    <button class="btn btn-primary btn-lg" type="submit"
+                        [disabled]="!transactionForm.form.valid">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
