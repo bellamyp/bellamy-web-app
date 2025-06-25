@@ -8,8 +8,10 @@
                 <!-- Date Field -->
                 <div class="form-group mb-4">
                     <label for="date" class="font-weight-bold glassy-label">Date</label>
-                    <input class="form-control form-control-lg glassy-input" type="date" id="date" name="date"
-                        [(ngModel)]="transaction.date" required />
+                    <input type="date" id="date" name="date" class="form-control form-control-lg glassy-input"
+                        [ngModel]="transaction.date | date:'yyyy-MM-dd'" (ngModelChange)="onDateChange($event)"
+                        required />
+
                 </div>
 
                 <!-- Amount Field -->

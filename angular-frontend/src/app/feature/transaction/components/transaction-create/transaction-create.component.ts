@@ -29,12 +29,17 @@ export class TransactionCreateComponent implements OnInit {
   ngOnInit(): void {
     this.loadTransactionTypes();
     this.loadBanks();
+    this.transaction.date = new Date(); // Set default date to today
   }
 
   // Method called when the form is submitted
   onSubmit() {
     console.log('Transaction submitted:', this.transaction);
     this.saveTransaction();
+  }
+
+  onDateChange(dateString: string): void {
+    this.transaction.date = new Date(dateString);
   }
 
   goBack() {

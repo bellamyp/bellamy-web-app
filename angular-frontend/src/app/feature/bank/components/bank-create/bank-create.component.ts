@@ -50,18 +50,6 @@ export class BankCreateComponent implements OnInit {
     this.router.navigate(['/bank-dashboard']);
   }
 
-  private loadBankTypes(): void {
-    this.bankService.getBankTypes().subscribe({
-      next: (types) => {
-        this.bankTypes.set(types)
-
-        // Debugging output to verify bank types
-        console.log('BankTypes:', this.bankTypes());
-      },
-      error: (err) => console.error('Failed to load bank types', err)
-    });
-  }
-
   updateBankName(name: string) {
     this.bank.update(b => ({ ...b, name }));
   }
@@ -72,6 +60,18 @@ export class BankCreateComponent implements OnInit {
 
   updateBankType(type: string) {
     this.bank.update(b => ({ ...b, type }));
+  }
+
+  private loadBankTypes(): void {
+    this.bankService.getBankTypes().subscribe({
+      next: (types) => {
+        this.bankTypes.set(types)
+
+        // Debugging output to verify bank types
+        console.log('BankTypes:', this.bankTypes());
+      },
+      error: (err) => console.error('Failed to load bank types', err)
+    });
   }
 
 }
