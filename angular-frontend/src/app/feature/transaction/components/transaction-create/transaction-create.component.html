@@ -19,22 +19,24 @@
                         [(ngModel)]="transaction.amount" required />
                 </div>
 
-                <!-- Type Field (ng-select) -->
+                <!-- Transaction Type Dropdown -->
                 <div class="form-group mb-4">
                     <label for="type" class="font-weight-bold glassy-label">Transaction Type</label>
-                    <ng-select [items]="transactionTypes" bindLabel="type" bindValue="id" [(ngModel)]="transaction.type"
-                        name="type" [placeholder]="transaction.type ? '' : 'Select Transaction Type'"
-                        [searchable]="true" [dropdownPosition]="'bottom'" [appendTo]="'body'" class="glassy-select">
-                    </ng-select>
+                    <select id="type" name="type" class="form-control form-control-lg glassy-select"
+                        [(ngModel)]="transaction.type" required>
+                        <option value="" disabled selected>Select Transaction Type</option>
+                        <option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</option>
+                    </select>
                 </div>
 
-                <!-- Bank Field -->
+                <!-- Bank Dropdown -->
                 <div class="form-group mb-4">
                     <label for="bank" class="font-weight-bold glassy-label">Bank</label>
-                    <ng-select [items]="banks" bindLabel="name" bindValue="id" [(ngModel)]="transaction.bank"
-                        name="bank" [placeholder]="transaction.bank ? '' : 'Select Bank'" [searchable]="true"
-                        [dropdownPosition]="'bottom'" [appendTo]="'body'" class="glassy-select">
-                    </ng-select>
+                    <select id="bank" name="bank" class="form-control form-control-lg glassy-select"
+                        [(ngModel)]="transaction.bank" required>
+                        <option value="" disabled selected>Select Bank</option>
+                        <option *ngFor="let bank of banks" [value]="bank.id">{{ bank.name }}</option>
+                    </select>
                 </div>
 
                 <!-- Notes Field -->

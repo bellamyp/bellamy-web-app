@@ -6,11 +6,11 @@ import { BankService } from '../../../bank/service/bank.service';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-create',
-  imports: [FormsModule, NgSelectModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './transaction-create.component.html',
   styleUrl: './transaction-create.component.scss'
 })
