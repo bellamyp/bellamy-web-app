@@ -26,6 +26,11 @@ public class TransactionTypeService {
         return transactionTypeRepository.findById(id);
     }
 
+    public TransactionType findTypeByString(String type) {
+        return transactionTypeRepository.findByType(type)
+                .orElseThrow(() -> new TransactionTypeCreationException("TransactionType not found: " + type));
+    }
+
     public List<String> findAllTransactionTypes() {
         List<TransactionType> transactionTypes = transactionTypeRepository.findAll();
         return transactionTypes.stream()

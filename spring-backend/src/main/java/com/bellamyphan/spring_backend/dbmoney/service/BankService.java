@@ -8,6 +8,7 @@ import com.bellamyphan.spring_backend.dbmoney.mapper.BankMapper;
 import com.bellamyphan.spring_backend.dbmoney.repository.BankRepository;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class BankService {
     private final BankMapper bankMapper;
 
     // Save a bank
+    @Transactional
+    // Need to move DTO mapping to Controller layer
     public Bank createNewBank(BankCreateRequestDto bankCreateRequestDto, Long userId) {
         Bank bank = bankMapper.toEntity(bankCreateRequestDto);
         // Lookup existing BankType by name
@@ -51,5 +54,10 @@ public class BankService {
         return banks.stream()
                 .map(bankMapper::toBankInputDto)
                 .toList();
+    }
+
+    public Bank findBankById(Long bankId) {
+        return bankRepository.findById(bankId)
+                .orElseThrow(() -> new RuntimeException("Bank not found with id: " + bankId));
     }
 }
