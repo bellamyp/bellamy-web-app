@@ -1,6 +1,7 @@
 package com.bellamyphan.spring_backend.dbuser.service;
 
 import com.bellamyphan.spring_backend.dbuser.entity.Role;
+import com.bellamyphan.spring_backend.dbuser.entity.RoleEnum;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.exception.UserAlreadyExistsException;
 import com.bellamyphan.spring_backend.dbuser.repository.UserRepository;
@@ -65,14 +66,20 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User saveUser(User user) {
+    public User saveUser(User user, Boolean isDemo) {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("Username already registered by another user");
         }
         // Encode the password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        // Assign default role
-        Role userRole = roleService.getRoleOrThrow("ROLE_USER");
+        // Set the roles for the user
+        Role userRole;
+        if (isDemo) {
+            userRole = roleService.getRoleOrThrow(RoleEnum.ROLE_DEMO.getRoleName());
+        } else {
+            // Assign default role
+            userRole = roleService.getRoleOrThrow(RoleEnum.ROLE_USER.getRoleName());
+        }
         user.setRoles(new HashSet<>(List.of(userRole)));
         // Save the user to the database
         logger.info("Saving user with username: {}", user.getUsername());

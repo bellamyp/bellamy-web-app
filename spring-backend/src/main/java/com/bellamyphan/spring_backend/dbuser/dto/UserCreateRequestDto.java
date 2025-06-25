@@ -1,5 +1,6 @@
 package com.bellamyphan.spring_backend.dbuser.dto;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,7 @@ public class UserCreateRequestDto {
 
     @NotBlank(message = "Password is required")
     private String password;
+
+    @NotNull
+    private Boolean isDemo;
 }
