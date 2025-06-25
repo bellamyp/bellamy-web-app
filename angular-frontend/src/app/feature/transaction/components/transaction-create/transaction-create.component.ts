@@ -59,7 +59,7 @@ export class TransactionCreateComponent implements OnInit {
 
   // Navigate to transaction list
   private goToTransactionList() {
-    this.router.navigate(['/money-transactions']);
+    this.router.navigate(['/transaction-dashboard']);
   }
 
   private loadTransactionTypes(): void {

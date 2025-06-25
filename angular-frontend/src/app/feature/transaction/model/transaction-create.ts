@@ -6,5 +6,5 @@ export class TransactionCreate {
     amount!: number;
     type!: string;
     notes?: string;
-    bank?: BankInput;
+    bankId?: number;
 }

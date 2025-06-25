@@ -34,10 +34,10 @@
                 <!-- Bank Dropdown -->
                 <div class="form-group mb-4">
                     <label for="bank" class="font-weight-bold glassy-label">Bank</label>
-                    <select id="bank" name="bank" class="form-control form-control-lg glassy-select"
-                        [(ngModel)]="transaction.bank" required>
+                    <select id="bank" name="bankId" class="form-control form-control-lg glassy-select"
+                        [(ngModel)]="transaction.bankId" required>
                         <option value="" disabled selected>Select Bank</option>
-                        <option *ngFor="let bank of banks" [value]="bank.id">{{ bank.name }}</option>
+                        <option *ngFor="let bank of banks" [ngValue]="bank.id">{{ bank.name }}</option>
                     </select>
                 </div>
 
