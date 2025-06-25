@@ -1,51 +1,53 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
-            <h3 class="text-center mb-4 text-primary">Create Transaction</h3>
+            <h3 class="text-center mb-4 text-primary glassy-title">Create Transaction</h3>
 
-            <form (ngSubmit)="onSubmit()" #transactionForm="ngForm" class="position-relative">
+            <form (ngSubmit)="onSubmit()" #transactionForm="ngForm"
+                class="position-relative glassy-form p-4 rounded-4 shadow-lg">
                 <!-- Date Field -->
                 <div class="form-group mb-4">
-                    <label for="date" class="font-weight-bold">Date</label>
-                    <input class="form-control form-control-lg" type="date" id="date" name="date"
+                    <label for="date" class="font-weight-bold glassy-label">Date</label>
+                    <input class="form-control form-control-lg glassy-input" type="date" id="date" name="date"
                         [(ngModel)]="transaction.date" required />
                 </div>
 
                 <!-- Amount Field -->
                 <div class="form-group mb-4">
-                    <label for="amount" class="font-weight-bold">Amount</label>
-                    <input class="form-control form-control-lg" type="number" id="amount" name="amount"
+                    <label for="amount" class="font-weight-bold glassy-label">Amount</label>
+                    <input class="form-control form-control-lg glassy-input" type="number" id="amount" name="amount"
                         [(ngModel)]="transaction.amount" required />
                 </div>
 
                 <!-- Type Field (ng-select) -->
                 <div class="form-group mb-4">
-                    <label for="type" class="font-weight-bold">Transaction Type</label>
+                    <label for="type" class="font-weight-bold glassy-label">Transaction Type</label>
                     <ng-select [items]="transactionTypes" bindLabel="type" bindValue="id" [(ngModel)]="transaction.type"
                         name="type" placeholder="Select Transaction Type" [searchable]="true"
-                        [dropdownPosition]="'bottom'" [appendTo]="'body'" class="form-control form-control-lg">
+                        [dropdownPosition]="'bottom'" [appendTo]="'body'" class="glassy-select">
                     </ng-select>
                 </div>
 
                 <!-- Bank Field -->
                 <div class="form-group mb-4">
-                    <label for="bank" class="font-weight-bold">Bank</label>
+                    <label for="bank" class="font-weight-bold glassy-label">Bank</label>
                     <ng-select [items]="banks" bindLabel="name" bindValue="id" [(ngModel)]="transaction.bank"
                         name="bank" placeholder="Select Bank" [searchable]="true" [dropdownPosition]="'bottom'"
-                        [appendTo]="'body'" class="form-control form-control-lg" />
+                        [appendTo]="'body'" class="glassy-select">
+                    </ng-select>
                 </div>
 
                 <!-- Notes Field -->
                 <div class="form-group mb-4">
-                    <label for="notes" class="font-weight-bold">Notes</label>
-                    <textarea class="form-control form-control-lg" id="notes" name="notes"
+                    <label for="notes" class="font-weight-bold glassy-label">Notes</label>
+                    <textarea class="form-control form-control-lg glassy-input" id="notes" name="notes"
                         [(ngModel)]="transaction.notes" rows="4"></textarea>
                 </div>
 
                 <!-- Buttons Section -->
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-secondary btn-lg" type="button" (click)="goBack()">Back</button>
-                    <button class="btn btn-primary btn-lg" type="submit"
+                    <button class="btn btn-secondary btn-lg glassy-btn" type="button" (click)="goBack()">Back</button>
+                    <button class="btn btn-primary btn-lg glassy-btn" type="submit"
                         [disabled]="!transactionForm.form.valid">Submit</button>
                 </div>
             </form>
