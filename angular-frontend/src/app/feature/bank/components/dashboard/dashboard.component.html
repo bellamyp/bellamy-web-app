@@ -37,7 +37,22 @@
         <div class="card h-100 border-light bg-transparent text-white">
           <div class="card-header bg-success">Checking Accounts</div>
           <div class="card-body">
-            <!-- Fill in later -->
+            <div *ngIf="banks.length > 0; else noBanks">
+              <ul class="list-group list-group-flush text-white">
+                <li *ngFor="let bank of banks"
+                  class="list-group-item bg-transparent border-light d-flex justify-content-between align-items-center">
+                  {{ bank.name }}
+                  <div>
+                    <button class="btn btn-sm btn-outline-light me-1" (click)="bankDetails()">Details</button>
+                    <button class="btn btn-sm btn-outline-warning me-1" (click)="updateBank()">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="deleteBank()">Delete</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <ng-template #noBanks>
+              <p class="text-muted">No checking accounts available.</p>
+            </ng-template>
           </div>
         </div>
       </div>
