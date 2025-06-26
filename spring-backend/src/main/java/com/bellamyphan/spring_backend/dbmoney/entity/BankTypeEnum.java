@@ -14,4 +14,8 @@ public enum BankTypeEnum {
     BankTypeEnum(String type) {
         this.type = type;
     }
+
+    public String getDisplayName() {
+        return type;
+    }
 }

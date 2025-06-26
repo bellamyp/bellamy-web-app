@@ -42,7 +42,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/resume").permitAll()
                         // If a user is "USER", limit access to specific endpoints
-                        .requestMatchers("/api/transactions/**", "/api/banks/**").hasRole("USER")
+                        .requestMatchers("/api/transactions/**", "/api/banks/**")
+                        .hasAnyRole("USER", "DEMO")
                         // Catch-all: if a user is "ADMIN", allow access to everything
                         .anyRequest().hasRole("ADMIN")
                 )

@@ -28,11 +28,15 @@ public class BankService {
     @Transactional
     public Bank createNewBank(Bank bank, Long userId) {
         // Lookup existing BankType by name
-        BankType bankType = bankTypeService.findByNameIgnoreCase(bank.getType());
+        BankType bankType = bankTypeService.findByNameIgnoreCase(bank.getType().getType());
         bank.setId(null); // Ensure the ID is null for a new entity
         bank.setUserId(userId); // Set the userId from the authenticated user
         bank.setType(bankType);
         return bankRepository.save(bank);
+    }
+
+    public void saveAllByUserDemoService(List<Bank> banks) {
+        bankRepository.saveAll(banks);
     }
 
     // Find by userId

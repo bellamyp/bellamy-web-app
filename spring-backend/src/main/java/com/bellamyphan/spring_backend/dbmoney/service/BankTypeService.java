@@ -28,9 +28,9 @@ public class BankTypeService {
                 .collect(Collectors.toList());
     }
 
-    public BankType findByNameIgnoreCase(BankType bankType) {
-        return bankTypeRepository.findByTypeIgnoreCase(bankType.getType())
-                .orElseThrow(() -> new BankTypeCreationException("BankType not found: " + bankType.getType()));
+    public BankType findByNameIgnoreCase(String bankType) {
+        return bankTypeRepository.findByTypeIgnoreCase(bankType)
+                .orElseThrow(() -> new BankTypeCreationException("BankType not found: " + bankType));
     }
 
     @Transactional
@@ -48,8 +48,8 @@ public class BankTypeService {
         }
     }
 
-    private BankType createBankTypeIfNotExists(String bankType) {
-        return bankTypeRepository.findByType(bankType)
+    private void createBankTypeIfNotExists(String bankType) {
+        bankTypeRepository.findByType(bankType)
                 .map(existingType -> {
                     logger.info("BankType '{}' already exists", bankType);
                     return existingType;
