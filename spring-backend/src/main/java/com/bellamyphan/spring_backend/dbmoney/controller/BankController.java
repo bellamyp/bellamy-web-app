@@ -5,6 +5,7 @@ import com.bellamyphan.spring_backend.dbmoney.dto.BankCreateResponseDto;
 import com.bellamyphan.spring_backend.dbmoney.dto.BankInputDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
 import com.bellamyphan.spring_backend.dbmoney.dto.BankMapper;
+import com.bellamyphan.spring_backend.dbmoney.entity.BankTypeEnum;
 import com.bellamyphan.spring_backend.dbmoney.service.BankService;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;
@@ -44,9 +45,19 @@ public class BankController {
     }
 
     @GetMapping
-    ResponseEntity<List<BankInputDto>> getAllBanksByUserId() {
-        List<BankInputDto> bankInputDtos = bankService.getBanksByAuthenticatedUser();
+    ResponseEntity<List<BankInputDto>> getAllBanksByType(
+            @RequestParam(required = false) BankTypeEnum bankTypeEnum) {
+        // Hold the result list
+        List<BankInputDto> bankInputDtos;
+//        // Debug:
+//        System.out.println(">>> Received param: " + bankTypeEnum);
+        // Get banks by type if bankType is provided, otherwise get all banks
+        if (bankTypeEnum != null) {
+            bankInputDtos = bankService.getBanksByAuthenticatedUser(bankTypeEnum);
+        } else {
+            bankInputDtos = bankService.getBanksByAuthenticatedUser();
+        }
+        // Return the list of banks
         return ResponseEntity.ok(bankInputDtos);
     }
-
 }

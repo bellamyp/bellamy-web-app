@@ -7,6 +7,8 @@ import com.bellamyphan.spring_backend.dbmoney.service.BankService;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +17,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserDemoService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserDemoService.class);
     private final SampleBankData sampleBankData;
     private final BankService bankService;
 
     @Transactional
     public void generateDemoData(User user) {
+        // Logging information
+        logger.info("Generating demo banks for demo username: {}", user.getUsername());
         // Generate sample checking banks for the demo user
         List<Bank> sampleCheckingBanks = sampleBankData.generateSampleBanks(
                 2, user.getId(), BankTypeEnum.CHECKING);

@@ -4,6 +4,7 @@ import com.bellamyphan.spring_backend.dbmoney.dto.BankInputDto;
 import com.bellamyphan.spring_backend.dbmoney.entity.Bank;
 import com.bellamyphan.spring_backend.dbmoney.entity.BankType;
 import com.bellamyphan.spring_backend.dbmoney.dto.BankMapper;
+import com.bellamyphan.spring_backend.dbmoney.entity.BankTypeEnum;
 import com.bellamyphan.spring_backend.dbmoney.repository.BankRepository;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;
@@ -51,6 +52,21 @@ public class BankService {
         // Get banks by user id
         List<Bank> banks = bankRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new RuntimeException("No banks found for user id: " + user.getId()));
+        // Map to dto
+        return banks.stream()
+                .map(bankMapper::toBankInputDto)
+                .toList();
+    }
+
+    public List<BankInputDto> getBanksByAuthenticatedUser(BankTypeEnum bankTypeEnum) {
+        // Get user by the jwt token
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findByUserName(username);
+        // Get banks by user id and bank type
+        BankType bankType = bankTypeService.findByNameIgnoreCase(bankTypeEnum.getDisplayName());
+        List<Bank> banks = bankRepository.findByUserIdAndType(user.getId(), bankType)
+                .orElseThrow(() -> new RuntimeException("No banks found for user id: " + user.getId()
+                        + " and bank type: " + bankTypeEnum));
         // Map to dto
         return banks.stream()
                 .map(bankMapper::toBankInputDto)

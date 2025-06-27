@@ -53,11 +53,6 @@ public class SampleBankData {
         return bank + " " + suffix;
     }
 
-    private BankTypeEnum getRandomBankTypeEnum() {
-        BankTypeEnum[] values = BankTypeEnum.values();
-        return values[random.nextInt(values.length)];
-    }
-
     private LocalDate generateRandomDateBetween(LocalDate start, LocalDate end) {
         int days = (int) (end.toEpochDay() - start.toEpochDay());
         long randomDay = start.toEpochDay() + random.nextInt(days + 1);
