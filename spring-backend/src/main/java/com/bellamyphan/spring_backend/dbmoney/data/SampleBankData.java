@@ -30,16 +30,17 @@ public class SampleBankData {
 
     private final BankTypeService bankTypeService;
 
-    public List<Bank> generateSampleBanks(int count, Long userId) {
+    public List<Bank> generateSampleBanks(int count, Long userId, BankTypeEnum bankTypeEnum) {
         List<Bank> generatedBanks = new ArrayList<>();
+        BankType bankType = bankTypeService.findByNameIgnoreCase(bankTypeEnum.getType());
         for (int i = 0; i < count; i++) {
-            BankTypeEnum typeEnum = BankTypeEnum.values()[random.nextInt(BankTypeEnum.values().length)];
-            BankType bankType = bankTypeService.findByNameIgnoreCase(typeEnum.getType());
-
-            String name = generateBankName() + " " + getRandomBankTypeEnum().getDisplayName();
-            LocalDate openDate = generateRandomDateBetween(LocalDate.of(2015, 1, 1),
+            // Generate random bank name
+            String name = generateBankName() + " " + bankTypeEnum.getDisplayName();
+            // Generate random open date
+            LocalDate openDate = generateRandomDateBetween(
+                    LocalDate.of(2010, 1, 1),
                     LocalDate.of(2025, 6, 1));
-
+            // Create a new Bank object and add to the list
             Bank bank = new Bank(name, openDate, null, bankType, userId); // ID auto generated
             generatedBanks.add(bank);
         }
