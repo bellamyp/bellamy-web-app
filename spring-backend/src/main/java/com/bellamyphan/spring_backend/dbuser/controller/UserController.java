@@ -2,6 +2,7 @@ package com.bellamyphan.spring_backend.dbuser.controller;
 
 import com.bellamyphan.spring_backend.dbuser.dto.UserCreateRequestDto;
 import com.bellamyphan.spring_backend.dbuser.dto.UserCreateResponseDto;
+import com.bellamyphan.spring_backend.dbuser.entity.RoleEnum;
 import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.dto.UserMapper;
 import com.bellamyphan.spring_backend.dbuser.service.UserDemoService;
@@ -29,8 +30,9 @@ public class UserController {
         User requestedUser = userMapper.toEntity(user);
         // Get the isDemo flag from the request DTO
         Boolean isDemo = user.getIsDemo();
+        RoleEnum role = isDemo ? RoleEnum.ROLE_DEMO : RoleEnum.ROLE_USER;
         // Create and save the new user with the correct role (Demo or User)
-        User createdUser = userService.saveUser(requestedUser, isDemo);
+        User createdUser = userService.saveUser(requestedUser, role);
         // If Demo user, then generate demo data
         if (isDemo) {
             userDemoService.generateDemoData(createdUser);

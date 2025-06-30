@@ -42,44 +42,37 @@ public class UserService implements UserDetailsService {
     private String defaultAdminLastname;
 
     @Transactional
-    public void createFirstUser() {
-        if (userRepository.findByUsername(defaultAdminUsername).isEmpty()) {
-            // Encode the admin password
-            String encodedPassword = passwordEncoder.encode(defaultAdminPassword);
-            logger.debug("Encoded password for admin user: {}", defaultAdminUsername);
-            // Check if ROLE_ADMIN, ROLE_USER exist, else throw exceptions
-            Role adminRole = roleService.getRoleOrThrow("ROLE_ADMIN");
-            Role userRole = roleService.getRoleOrThrow("ROLE_USER");
-            // Create the user and assign the role
-            User adminUser = new User();
-            adminUser.setFirstName(defaultAdminFirstname);
-            adminUser.setLastName(defaultAdminLastname);
-            adminUser.setUsername(defaultAdminUsername);
-            adminUser.setPassword(encodedPassword);
-            adminUser.setRoles(new HashSet<>(List.of(adminRole, userRole)));
-            // Save the user
-            userRepository.save(adminUser);
-            logger.info("Admin user created with username: {}", defaultAdminUsername);
-        } else {
-            logger.info("Admin user with username '{}' already exists. Skipping creation.", defaultAdminUsername);
-        }
+    public void createFirstAdminUser() {
+        // Get the default admin username from properties
+        User adminUser = new User(
+                defaultAdminFirstname, defaultAdminLastname, defaultAdminUsername, defaultAdminPassword);
+        // Save the admin user
+        saveUser(adminUser, RoleEnum.ROLE_ADMIN);
     }
 
     @Transactional
-    public User saveUser(User user, Boolean isDemo) {
+    public void createFirstDemoUser() {
+        // Default demo user details
+        String firstName = "Test First Name";
+        String lastName = "Test Last Name";
+        String username = "test";
+        String password = "test";
+        // Create the demo user and save it
+        User demoUser = new User(firstName, lastName, username, password);
+        saveUser(demoUser, RoleEnum.ROLE_DEMO);
+    }
+
+    @Transactional
+    public User saveUser(User user, RoleEnum userRoleEnum) {
+        // Check if the user already exists by username
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new UserAlreadyExistsException("Username already registered by another user");
+            throw new UserAlreadyExistsException(
+                    "This username " + user.getUsername() + " already exists. Skipping creation.");
         }
         // Encode the password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         // Set the roles for the user
-        Role userRole;
-        if (isDemo) {
-            userRole = roleService.getRoleOrThrow(RoleEnum.ROLE_DEMO.getRoleName());
-        } else {
-            // Assign default role
-            userRole = roleService.getRoleOrThrow(RoleEnum.ROLE_USER.getRoleName());
-        }
+        Role userRole = roleService.getRoleOrThrow(userRoleEnum.getRoleName());
         user.setRoles(new HashSet<>(List.of(userRole)));
         // Save the user to the database
         logger.info("Saving user with username: {}", user.getUsername());
