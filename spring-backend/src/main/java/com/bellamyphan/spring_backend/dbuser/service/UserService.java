@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void createFirstDemoUser() {
+    public User createFirstDemoUser() {
         // Default demo user details
         String firstName = "Test First Name";
         String lastName = "Test Last Name";
@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
         String password = "test";
         // Create the demo user and save it
         User demoUser = new User(firstName, lastName, username, password);
-        saveUser(demoUser, RoleEnum.ROLE_DEMO);
+        return saveUser(demoUser, RoleEnum.ROLE_DEMO);
     }
 
     @Transactional

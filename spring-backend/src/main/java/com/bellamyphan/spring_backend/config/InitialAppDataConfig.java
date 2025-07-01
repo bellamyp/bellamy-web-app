@@ -2,7 +2,9 @@ package com.bellamyphan.spring_backend.config;
 
 import com.bellamyphan.spring_backend.dbmoney.service.BankTypeService;
 import com.bellamyphan.spring_backend.dbmoney.service.TransactionTypeService;
+import com.bellamyphan.spring_backend.dbuser.entity.User;
 import com.bellamyphan.spring_backend.dbuser.service.RoleService;
+import com.bellamyphan.spring_backend.dbuser.service.UserDemoService;
 import com.bellamyphan.spring_backend.dbuser.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -20,6 +22,7 @@ public class InitialAppDataConfig {
     private final TransactionTypeService transactionTypeService;
     private final RoleService roleService;
     private final UserService userService;
+    private final UserDemoService userDemoService;
 
     @Bean
     public CommandLineRunner initAppData() {
@@ -45,6 +48,8 @@ public class InitialAppDataConfig {
         userService.createFirstAdminUser();
 
         logger.info("Creating first demo user...");
-        userService.createFirstDemoUser();
+        User demoUser = userService.createFirstDemoUser();
+        // Generate demo data for the created user
+        userDemoService.generateDemoData(demoUser);
     }
 }
